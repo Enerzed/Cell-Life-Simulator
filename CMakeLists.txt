@@ -6,5 +6,8 @@ project(
     VERSION 1.0
 )
 
+enable_testing()
+
 add_subdirectory(deps)
 add_subdirectory(src)
+add_subdirectory(tests)
