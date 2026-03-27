@@ -1,6 +1,8 @@
 #pragma once
+
 #define MAP_WIDTH 40
 #define MAP_HEIGHT 40
+
 #include "Cell.h"
 #include <iterator>
 #include <iostream>
@@ -24,7 +26,7 @@ private:
 	sf::Sprite mapSprite;
 	Random random;
 public:
-	Map()
+	Map() : mapTexture(), mapSprite(mapTexture)
 	{
 		for (int i = 0; i < MAP_HEIGHT; i++)
 			for (int j = 0; j < MAP_WIDTH; j++)
@@ -43,7 +45,6 @@ public:
 			}
 		mapImage.loadFromFile("textures/textures.png");
 		mapTexture.loadFromImage(mapImage);
-		mapSprite.setTexture(mapTexture);
 	}
 
 	void generateFood(int maxFood)
@@ -302,30 +303,30 @@ public:
 			for (int j = 0; j < MAP_WIDTH; j++)
 			{
 				if ((map.at(i * MAP_WIDTH + j)).getName() == "undefined")
-					mapSprite.setTextureRect(sf::IntRect(0, 0, 16, 16));
+					mapSprite.setTextureRect(sf::Rect(sf::Vector2i(0, 0), sf::Vector2i(16, 16)));
 				else if ((map.at(i * MAP_WIDTH + j)).getName() == "wall")
-					mapSprite.setTextureRect(sf::IntRect(176, 0, 16, 16));
+					mapSprite.setTextureRect(sf::Rect(sf::Vector2i(176, 0), sf::Vector2i(16, 16)));
 				else if ((map.at(i * MAP_WIDTH + j)).getName() == "food")
-					mapSprite.setTextureRect(sf::IntRect(144, 0, 16, 16));
+					mapSprite.setTextureRect(sf::Rect(sf::Vector2i(144, 0), sf::Vector2i(16, 16)));
 				else if ((map.at(i * MAP_WIDTH + j)).getName() == "meat")
-					mapSprite.setTextureRect(sf::IntRect(160, 0, 16, 16));
+					mapSprite.setTextureRect(sf::Rect(sf::Vector2i(160, 0), sf::Vector2i(16, 16)));
 				else if ((map.at(i * MAP_WIDTH + j)).getName() == "cell")
 				{
 					switch ((map.at(i * MAP_WIDTH + j)).getRotation())
 					{
-					case 1: {mapSprite.setTextureRect(sf::IntRect(16, 0, 16, 16)); break; }
-					case 2: {mapSprite.setTextureRect(sf::IntRect(32, 0, 16, 16)); break; }
-					case 3: {mapSprite.setTextureRect(sf::IntRect(48, 0, 16, 16)); break; }
-					case 4: {mapSprite.setTextureRect(sf::IntRect(64, 0, 16, 16)); break; }
-					case 5: {mapSprite.setTextureRect(sf::IntRect(80, 0, 16, 16)); break; }
-					case 6: {mapSprite.setTextureRect(sf::IntRect(96, 0, 16, 16)); break; }
-					case 7: {mapSprite.setTextureRect(sf::IntRect(112, 0, 16, 16)); break; }
-					case 8: {mapSprite.setTextureRect(sf::IntRect(128, 0, 16, 16)); break; }
+					case 1: {mapSprite.setTextureRect(sf::Rect(sf::Vector2i(16, 0), sf::Vector2i(16, 16))); break; }
+					case 2: {mapSprite.setTextureRect(sf::Rect(sf::Vector2i(32, 0), sf::Vector2i(16, 16))); break; }
+					case 3: {mapSprite.setTextureRect(sf::Rect(sf::Vector2i(48, 0), sf::Vector2i(16, 16))); break; }
+					case 4: {mapSprite.setTextureRect(sf::Rect(sf::Vector2i(64, 0), sf::Vector2i(16, 16))); break; }
+					case 5: {mapSprite.setTextureRect(sf::Rect(sf::Vector2i(80, 0), sf::Vector2i(16, 16))); break; }
+					case 6: {mapSprite.setTextureRect(sf::Rect(sf::Vector2i(96, 0), sf::Vector2i(16, 16))); break; }
+					case 7: {mapSprite.setTextureRect(sf::Rect(sf::Vector2i(112, 0), sf::Vector2i(16, 16))); break; }
+					case 8: {mapSprite.setTextureRect(sf::Rect(sf::Vector2i(128, 0), sf::Vector2i(16, 16))); break; }
 					}
 					mapSprite.setColor((map.at(i * MAP_WIDTH + j)).getColor());
 				}
 
-				mapSprite.setPosition(j * 16, i * 16);
+				mapSprite.setPosition(sf::Vector2f(j * 16, i * 16));
 				window.draw(mapSprite);
 				mapSprite.setColor(sf::Color::White);
 			}
