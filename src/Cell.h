@@ -3,6 +3,7 @@
 #include "Entity.h"
 
 
+// Class
 class Cell :
     public Entity
 {
