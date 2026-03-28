@@ -7,6 +7,8 @@
 #include <iterator>
 #include <iostream>
 
+
+// Whole map
 class Map
 {
 private:
